@@ -1,0 +1,14 @@
+h1 タスクの新規登録
+
+.nav.justify-content-end
+  = link_to '一覧', tasks_path, class: 'nav-link'
+
+= render partial: 'form', locals: { task: @task }
+
+  // form_withブロックの最後ではsubmitヘルパーを呼んでいます
+  // これによって以下のようなsubmitボタンを表す
+  // <input type="submit" name="commit" value="登録する" class="btn btn-primary" data-disable-with="登録する">
+  // ここの登録するはlocalesファイルにデフォルトで設定されている用語が適用されているため
+  
+  // localsオプションはパーシャル内のローカル変数を設定してます。locales: { task: @task }と記述すると「インスタンス変数@taskをパーシャルないのローカル変数taskとして
+  // 渡す」という意味なる。これにより、ローカル変数をパーシャルから利用できるようになる

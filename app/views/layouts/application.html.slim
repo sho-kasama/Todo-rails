@@ -11,4 +11,7 @@ html
     .app-title.navbar-expand-md.navbar-light.bg-light
       .navbar-brand RailsToDo
     .container  
+      - if flash.notice.present?
+        .alert.alert-success = flash.notice
+        
       = yield
