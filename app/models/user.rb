@@ -1,0 +1,11 @@
+class User < ApplicationRecord
+
+    # has_secure_passwordを記述するとデータベースのカラムには対応しない属性が2つ追加されました
+    # 1つ目はpasswordです。　　二つ目は password_confirmation
+    # パスワードのハッシュ化だけでなく、認証のための機能も追加してくれてる。
+    has_secure_password
+
+    validates :name, presence: true
+    validates :email, presence: true, uniqueness: true
+
+end

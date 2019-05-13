@@ -1,5 +1,5 @@
 // エラーメッセージの検証
-- if task.erros.present?
+- if task.errors.present?
   ul#error_explanation
     - task.errors.full_messages.each do |message|
       li = message 
