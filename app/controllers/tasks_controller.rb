@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     # [タスクのid]部分が格納されてます"
     @task = Task.find(params[:id])
   end
-　
+
   # エラーハンドリングの実装をする
   def create
     @task = Task.new(task_params)
