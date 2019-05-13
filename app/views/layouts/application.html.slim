@@ -10,7 +10,20 @@ html
   body
     .app-title.navbar-expand-md.navbar-light.bg-light
       .navbar-brand RailsToDo
-    .container  
+
+
+    // ログインとログアウトのviewを書いた
+    // 認証機能を追加する場合には「ログインしていなければ一定の機能を使えなくする」といった制限をコントローラーの方に書いていく  
+    ul.navbar-nav.ml-auto
+      - if current_user
+        li.nav-item= link_to 'タスク一覧', task_path, class: 'nav-link'
+        li.nav-item= link_to 'ユーザー一覧', admin_user_path, class: 'nav-link'
+        li.nav-item= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
+      - else
+        li.nav-link= link_to 'ログイン', login_path, class: 'nav-link'
+
+  
+  .container  
       - if flash.notice.present?
         .alert.alert-success = flash.notice
         
