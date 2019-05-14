@@ -1,5 +1,9 @@
 class Admin::UsersController < ApplicationController
 
+  # フィルタを使う
+  before_action :require_admin
+
+
   def index
     @users = User.all
   end
@@ -46,6 +50,15 @@ class Admin::UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
+    end
+
+    # これでユーザー管理機能は管理権限を持っているユーザーだけが利用できるようになった
+    # 今回は権限を持たないユーザーからのアクセスであればトップ画面にリダイレクトさせるようにした
+    #  /admin/usersのパスに何かしらアクションが存在するということを権限を持たないユーザーに知らしめてしまうことになる
+    # アクションが存在しないHTTPステータスコード404を返すコードを書いてみてもいい
+    
+    def require_admin
+      redirect_to root_path unless current_user.admin?
     end
 
 end
