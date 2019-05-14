@@ -9,4 +9,8 @@ class User < ApplicationRecord
     validates :name, presence: true
     validates :email, presence: true, uniqueness: true
 
+
+    # User と taskの関係は一対多なので次のように記述する
+    has_many :tasks
+
 end

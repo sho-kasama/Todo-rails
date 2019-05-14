@@ -1,4 +1,11 @@
 class SessionsController < ApplicationController
+
+  # 親クラスにログインされてないとログイン画面にリダイレクトされてしまうフィルタが実装されているので
+  # ログインの処理のコントローラーにフィルタをスキップさせるコードをかく
+
+  skip_before_action :login_required
+
+
   def new
   end
 
