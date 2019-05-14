@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
-
+  
+  # タスク一覧を作成日時の新しい順に表示する
   def index
-    @tasks = current_user.tasks
+    @tasks = currnet_user.tasks.order(created_at: :desc)
   end
 
   def show
