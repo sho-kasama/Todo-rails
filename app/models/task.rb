@@ -19,7 +19,7 @@ class Task < ApplicationRecord
         errors.add(:name, 'にカンマを含めることはできません') if name&.include?(',')
       end
 
-      # コールバックの実装
+      # コールバックの実装 三項演算子
       def set_nameless_name
         self.name = '名前なし' if name.blank?
       end
