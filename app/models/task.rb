@@ -12,6 +12,8 @@ class Task < ApplicationRecord
     # またTaskクラスのインスタンスに対しては、task.userで紐づいたUserオブジェクトを得られるようになります
     belongs_to :user
 
+    scope :recent, -> { order(created_at: :desc )}
+
 
 
     private 
