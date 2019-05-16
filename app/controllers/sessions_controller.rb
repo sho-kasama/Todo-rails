@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   # 認証が成功した場合にセッションにuser_idを格納しています
 
 def create
-    user = User.find(email: session_params[:email])
+    user = User.find_by(email: session_params[:email])
 
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id 

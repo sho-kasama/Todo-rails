@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
       # 代入演算子としての|| ( 使い方は左辺が存在しない場合(偽)の場合、右辺の値が代入されるイメージ)
       def current_user
-        @current_user ||= User.find_by(id: session(:user_id)) if session[:user_id]
+        @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
       end
 
       # これでアプリケーション内の全てのアクションの処理前にユーザーがログイン済みかどうかのチェックが入り、ログイン済みでなかった場合はログイン画面を表示するようになります

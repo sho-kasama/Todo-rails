@@ -5,20 +5,21 @@ h1 タスクの詳細
 table.table.table-hover
   tbody
     tr
-      th = Task.human_attribute_name(:id)
-      td = @task.id
+      th= Task.human_attribute_name(:id)
+      td= @task.id
     tr 
-      th = Task.human_attribute_name(:name)
-      td = @task.name 
+      th= Task.human_attribute_name(:name)
+      td= @task.name 
     tr 
-      th = Task.human_attribute_name(:description)
-      td = simple_format(h(@task.description),{}, sanitize: false, wrapper_tag: "div")
+      th= Task.human_attribute_name(:description)
+      td= simple_format(h(@task.description),{}, sanitize: false, wrapper_tag: "div")
+      td= auto_link(simple_format(h(@task.description),{}, santiize: false, wrapper_tag: "div")) 
     tr
-      th = Task.human_attribute_name(:created_at)
-      th = @task.created_at
+      th= Task.human_attribute_name(:created_at)
+      th= @task.created_at
     tr 
-      th = Task.human_attribute_name(:updated_at)
-      td = @task.updated_at
+      th= Task.human_attribute_name(:updated_at)
+      td= @task.updated_at
 
 = link_to '編集', edit_task_path, class: 'btn btn-primary mr-3'
 = link_to '削除', @task, method: :delete, data: { confirm: "タスク「#{@task.name}」を削除します。よろしいですか〜？"}, class: 'btn btn-primary'
