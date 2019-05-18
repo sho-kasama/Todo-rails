@@ -59,4 +59,37 @@ describe 'タスク管理機能', type: :system do
       it_behaves_like 'ユーザーAが作成したタスクが表示される'
     end
   end
+
+  # タスクの名称を入力すると登録できることと
+  # タスクの名称を入力していないと検証エラーになることの2つのテストケースを記述する
+
+
+  describe '新規作成機能' do
+    let(:login_user) { user_a }
+
+    before do
+      visit new_task_path
+      fill_in 'Name', with: task_name
+      click_button 'Create Task'
+    end
+
+
+    context '新規作成画面で名称を入力したとき' do
+      let(:task_name)  { '新規作成のテストを書く' }
+
+      it '正常に登録される' do
+        expect(page).to have_selector '.alert-success', text: '新規作成のテストを書く'
+      end
+    end
+
+    #context '新規作成画面で名称を入力しなかったとき' do
+     # let(:task_name) { '' }
+
+      #it 'エラーとなる' do
+      #  within '#error_explanation' do
+       #   expect(page).to have_content 'Descriptionを入力してください'
+        #end
+      #end
+    #end
+  end
 end
