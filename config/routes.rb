@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   # HTTPメソッド getでログインのフォームを表示する
+  # GETメソッドで, '/login' というURLに対してリクエストがきたら
+  # SessionsControllerのnewというアクションを呼び出して欲しい
+  # また、'/login'というURLを,login_pathというヘルパーメソッドで生成できるようにする  
   get '/login', to: 'sessions#new'
 
   # HTTPメソッド postでフォームから送られてきた情報を元にログインを行う
