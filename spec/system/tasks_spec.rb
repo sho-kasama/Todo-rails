@@ -2,22 +2,61 @@ require 'rails_helper'
 
 
 describe 'タスク管理機能', type: :system do
-  describe '一覧表示機能' do
+    let(:user_a) { FactoryBot.create(:user, name: 'ユーザーz', email: 'z@exmaple.com') }
+    let(:user_b) { FactoryBot.create(:user, name: 'ユーザーv', email: 'v@example.com') }
+    let(:task_a) { FactoryBot.create(:task, name: '最初のタスク', user: user_a ) }
+
+    
     before do
-      user_a = FactoryBot.create(:user, name: 'ユーザーA', email: 'a@example.com')
       FactoryBot.create(:task, name: '最初のタスク', user: user_a)
+      # Specでは同じ階層にある全てのdescribe/context内で共通する処理は上の階層のbeforeのなかに処理を
+      # 書くことで共通化できる
+      visit login_path
+      fill_in 'メールアドレス', with: login_user.email
+      fill_in 'パスワード', with: login_user.password
+      click_button 'ログインする'
     end    
-    context 'ユーザーAがログインしている時' do
+
+    # RSpecではitを共通化する方法として、shared_examplesという仕組みを用意してる。
+    # exampleとは、itなどの期待する挙動を示す部分のことです
+    # このexampleをいくつかまとめて名前をつけて、テストケース間でシェアできるというものです
+
+    shared_examples_for 'ユーザーAが作成したタスクが表示される' do
+      it { expect(page).to have_content '最初のタスク' } 
+    end
+
+
+
+    # 詳細表示機能のSpexを追加する
+    describe '一覧表示機能' do
+      context 'ユーザーAがログインしている時' do
+        let (:login_user) { user_a }
+
+        # shared_exmaplesを利用するという記述
+        it_behaves_like 'ユーザーAが作成したタスクが表示される'
+      end
+
+      context 'ユーザーBがログインしているとき' do
+        let (:login_user) { user_b }
+
+        it 'ユーザーAが作成したタスクが表示されない' do 
+          # ユーザーAが作成したタスクの名称が画面上に表示されないことを確認
+          expect(page).to have_no_content '最初のタスク'
+        end
+      end
+   end
+
+
+   # 詳細表示機能のSpecを追加する
+   describe '詳細表示機能' do
+     context 'ユーザーAがログインしてる時' do
+      let(:login_user) { user_a }
+
       before do
-        visit login_path
-        fill_in 'メールアドレス', with: 'a@example.com'
-            fill_in 'パスワード', with: 'password'
-        click_button 'ログインする'
+        visit task_path(task_a)
       end
-      
-      it 'ユーザーAが作成したタスクが表示される' do
-        expect(page).to have_content '最初のタスク'
-      end
+
+      it_behaves_like 'ユーザーAが作成したタスクが表示される'
     end
   end
 end
