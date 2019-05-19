@@ -70,3 +70,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # 詳しい説明に含まれるURLをリンクとして表示する
 gem 'rails_autolink'
+
+# 一覧画面に検索機能を追加する
+gem 'ransack'

@@ -4,7 +4,14 @@ class TasksController < ApplicationController
 
 
   def index
-    @tasks = current_user.tasks.order(created_at: :desc)
+    # 検索パラメーターのデフォルトのパラメーターキーは :searchではなく、:qになった
+
+    # 検索フォームの入力内容で検索する
+    @q = current_user.tasks.ransack(params[:q])
+
+    # 重複を排除
+    @tasks = @q.result(distinct: true)
+
   end
 
   def show
