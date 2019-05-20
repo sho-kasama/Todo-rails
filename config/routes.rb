@@ -24,6 +24,11 @@ Rails.application.routes.draw do
   # タスクの一覧(index)が表示されるようにする
   root to: 'tasks#index'
   
-  resources :tasks
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # 確認画面は「CRUD」のためのアクションとしては見なされていないため、resoucesで一括で作られるルーティングとは別に定義してやる必要がある
+  # そこで保存前の(new)の確認をするという意味を込めて tasks/new/confirmというURLを confirm_newアクションに対応づけることにする
+  resources :tasks do
+    post :confirm, action: :confirm_new, on: :new 
+  end
+
+
 end

@@ -4,7 +4,14 @@ class TasksController < ApplicationController
 
 
   def index
-    @tasks = current_user.tasks.order(created_at: :desc)
+    # 検索パラメーターのデフォルトのパラメーターキーは :searchではなく、:qになった
+
+    # 検索フォームの入力内容で検索する
+    @q = current_user.tasks.ransack(params[:q])
+
+    # 重複を排除
+    @tasks = @q.result(distinct: true)
+
   end
 
   def show
@@ -15,6 +22,11 @@ class TasksController < ApplicationController
   # エラーハンドリングの実装をする
   def create
     @task = current_user.tasks.new(task_params)
+
+    if params[:back].present?
+      render :new
+      return
+    end
 
     if @task.save
       redirect_to @task, notice: "タスク「#{@task.name}」を登録しました。"
@@ -38,6 +50,13 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     redirect_to tasks_url,notice: "タスク「#{@task.name}」を削除しました。"
+  end
+
+  # 確認画面を表示するアクションを追加する
+  # 新規登録画面から送られてきた情報の検証を行い、問題があれば新規登録画面を検証メッセージと共に表示する
+  def confirm_new
+    @task = current_user.tasks.new(task_params)
+    render :new unless @task.valid?
   end
 
 
