@@ -1,0 +1,20 @@
+doctype html 
+html 
+  head 
+    title 
+      | TodoRails 
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-tubolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-tubolinks-track': 'reload'
+
+    body 
+      .app-title.navbar-expand-md.navbar-light.bg-light
+        .navbar-brand RailsTodo
+
+      ul.navbar-nav.ml-auto
+
+    .container 
+      // view/users/show.html.viewから引っ張ってきてる
+      = yield
+
