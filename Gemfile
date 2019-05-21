@@ -73,3 +73,6 @@ gem 'rails_autolink'
 
 # 一覧画面に検索機能を追加する
 gem 'ransack'
+
+# メール確認
+gem 'mailcatcher'
