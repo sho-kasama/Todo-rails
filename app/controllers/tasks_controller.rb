@@ -69,7 +69,7 @@ class TasksController < ApplicationController
     # フォームからリクエストパラメーターとして送られてきた情報が想定どおりであることをチェックし
     # 受け付ける想定であるname(名称)とdescription(詳しい説明)の情報だけを抜き取る役割をしてる
     def task_params 
-      params.require(:task).permit(:name, :description)
+      params.require(:task).permit(:name, :description, :image)
     end
 
     def set_task
