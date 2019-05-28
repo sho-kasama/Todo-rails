@@ -21,6 +21,7 @@ h1 タスク一覧
 
 
 = link_to '新規登録', new_task_path, class: 'btn btn-primary'
+= link_to 'エクスポート', tasks_path(format: :csv),class: 'btn btn-primary mb-6 ml-4'
 
 .mb-3
 table.table.table-hover

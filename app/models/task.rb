@@ -1,5 +1,22 @@
 class Task < ApplicationRecord
 
+
+  # メソッド名の前にselfをつけることでクラスメソッドを定義することができる
+  # CSVデータにどの属性をどの順番で出力するかをcsv_attributesと言うクラスメソッドから得られるように定義している
+  def self.csv_attributes
+    ["name","description","created_at","updated_at"]
+  end
+
+  def self.generate_csv
+    CSV.generate(headers: true) do |csv|  # CSV.generateを使ってCSVデータの文字列を生成します。生成した文字列がgenerate_csvクラスメソッドの戻り値となる
+      csv << csv_attributes # CSVの1行目としてヘッダを出力します。
+      all.each do |task|
+        csv << csv_attributes.map{|attr| task.send(attr) }
+      end
+    end
+  end
+
+
   # レコードとファイルの間に 1対1のマッピングを設定します。各レコードには1つのファイルを添付します。 
   has_one_attached :image
 

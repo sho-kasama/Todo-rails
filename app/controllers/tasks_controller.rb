@@ -5,13 +5,17 @@ class TasksController < ApplicationController
 
   def index
     # 検索パラメーターのデフォルトのパラメーターキーは :searchではなく、:qになった
-
     # 検索フォームの入力内容で検索する
     @q = current_user.tasks.ransack(params[:q])
-
     # 重複を排除
     @tasks = @q.result(distinct: true)
 
+    # 先ほどselfメソッドで定義したクラスメソッドを呼び出すコントローラーを実装する
+    # 新しいアクションを作るのではなく「一覧表示のindexアクションに異なるフォーマットでの出力機能を用紙する」と捉える
+    respond_to do |format| # format.htmlはHTMLとしてアクセスされた場合(URLに拡張子なしでアクセスされた場合), format.csvはCSVとしてアクセスされた場合(/task.csvというURLでアクセスされた場合)に実行される
+      format.html # HTMLフォーマットについてはslimのindex画面が表示されるだけ
+      format.csv { send_data @tasks.generate_csv, filename: "tasks-#{Time.zone.now.strftime('%Y%m%d%S')}.csv"} # send_dataメソッドを使ってレスポンスを送り出し、送り出したデータをブラウザからファイルとしてDLできるようにする
+    end
   end
 
   def show
@@ -75,6 +79,4 @@ class TasksController < ApplicationController
     def set_task
       @task = current_user.tasks.find(params[:id])
     end
-
-
 end
