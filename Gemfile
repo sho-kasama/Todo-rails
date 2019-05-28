@@ -76,3 +76,6 @@ gem 'ransack'
 
 # メール確認
 gem 'mailcatcher'
+
+# スクレイピング
+gem 'nokogiri'
