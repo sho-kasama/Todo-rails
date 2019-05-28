@@ -1,0 +1,16 @@
+form#new_user.new_user[accept-charset="UTF-8" action="/users" method="post"]
+  input[name="utf8" type="hidden" value="&#x2713;"]
+  input[name="authenticity_token" type="hidden" value="NNb6+J/j46LcrgYUC60wQ2titMuJQ5lLqyAbnbAUkdo="]
+  label[for="user_name"]
+    | Name
+  input#user_name[name="user[name]" type="text"]
+  label[for="user_email"]
+    | Email
+  input#user_email[name="user[email]" type="email"]
+  label[for="user_password"]
+    | Password
+  input#user_password[name="user[password]" type="password"]
+  label[for="user_password_confirmation"]
+    | Confirmation
+  input#user_password_confirmation[name="user[password_confirmation]" type="password"]
+  input.btn.btn-primary[name="commit" type="submit" value="Create my account"]

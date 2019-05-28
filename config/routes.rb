@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # ユーザーのCRUDを追加する
+  resources :users
+
+
   # HTTPメソッド getでログインのフォームを表示する
   # GETメソッドで, '/login' というURLに対してリクエストがきたら
   # SessionsControllerのnewというアクションを呼び出して欲しい
