@@ -3,6 +3,8 @@ h1 タスクの新規登録
 .nav.justify-content-end
   = link_to '一覧', tasks_path, class: 'nav-link'
 
+= render partial: 'form', locals: { task: @task }
+
 
   // form_withブロックの最後ではsubmitヘルパーを呼んでいます
   // これによって以下のようなsubmitボタンを表す
@@ -18,11 +20,12 @@ h1 タスクの新規登録
     - @task.errors.full_messages.each do |message|
       li = message
   
-= form_with model: @task, local: true, url: confirm_new_task_path do |f|
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: 'form-control', id: 'task_name'
-  .form-group
-    = f.label :description
-    = f.text_area :description, rows: 5, class: 'form-control', id: 'task_description'
-  = f.submit '確認', class: 'btn btn-primary'
+//
+  = form_with model: @task, local: true, url: confirm_new_task_path do |f|
+    .form-group
+      = f.label :name
+      = f.text_field :name, class: 'form-control', id: 'task_name'
+    .form-group
+      = f.label :description
+      = f.text_area :description, rows: 5, class: 'form-control', id: 'task_description'
+    = f.submit '確認', class: 'btn btn-primary'
