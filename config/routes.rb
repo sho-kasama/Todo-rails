@@ -26,8 +26,12 @@ Rails.application.routes.draw do
   
   # 確認画面は「CRUD」のためのアクションとしては見なされていないため、resoucesで一括で作られるルーティングとは別に定義してやる必要がある
   # そこで保存前の(new)の確認をするという意味を込めて tasks/new/confirmというURLを confirm_newアクションに対応づけることにする
+  # routing に collectionを追加するとき 
+  # 今回ならPOSTリクエスト+/tasks/import　などの(idを伴なわない)パスを認識し、リクエストをtasksコントローラーのimportアクションに移動させる
+
   resources :tasks do
     post :confirm, action: :confirm_new, on: :new 
+    post :import, on: :collection
   end
 
 
