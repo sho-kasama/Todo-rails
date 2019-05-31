@@ -23,7 +23,11 @@ h1 タスク一覧
 = link_to '新規登録', new_task_path, class: 'btn btn-primary'
 = link_to 'エクスポート', tasks_path(format: :csv),class: 'btn btn-primary mb-6 ml-4'
 
-= form_tag import_tasks_path, multipart: true, class: 'mb-3' do
+.mt-4
+  = paginate @tasks
+  = page_entries_info @tasks
+
+= form_tag import_tasks_path, multipart: true, class: 'mb-3 mt-5' do
   = file_field_tag :file
   = submit_tag "インポート", class: 'btn-primary'
 
