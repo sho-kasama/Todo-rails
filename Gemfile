@@ -79,3 +79,13 @@ gem 'mailcatcher'
 
 # スクレイピング
 gem 'nokogiri'
+
+# ページネーション追加する
+gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
+
+# 翻訳
+gem 'i18n_generators'
+
+# Sidekiq
+gem 'sidekiq'

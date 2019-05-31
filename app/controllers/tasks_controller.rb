@@ -8,7 +8,8 @@ class TasksController < ApplicationController
     # 検索フォームの入力内容で検索する
     @q = current_user.tasks.ransack(params[:q])
     # 重複を排除
-    @tasks = @q.result(distinct: true)
+    @tasks = @q.result(distinct: true).page(params[:page])
+
 
     # 先ほどselfメソッドで定義したクラスメソッドを呼び出すコントローラーを実装する
     # 新しいアクションを作るのではなく「一覧表示のindexアクションに異なるフォーマットでの出力機能を用紙する」と捉える
@@ -34,6 +35,7 @@ class TasksController < ApplicationController
 
     if @task.save
       TaskMailer.creation_email(@task).deliver_now
+      SampleJob.perform_later
       redirect_to @task, notice: "タスク「#{@task.name}」を登録しました。"
     else 
       render :new
