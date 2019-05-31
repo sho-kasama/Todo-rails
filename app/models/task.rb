@@ -1,5 +1,30 @@
 class Task < ApplicationRecord
 
+
+  # メソッド名の前にselfをつけることでクラスメソッドを定義することができる
+  # CSVデータにどの属性をどの順番で出力するかをcsv_attributesと言うクラスメソッドから得られるように定義している
+  def self.csv_attributes
+    ["name","description","created_at","updated_at"]
+  end
+
+  def self.generate_csv
+    CSV.generate(headers: true) do |csv|  # CSV.generateを使ってCSVデータの文字列を生成します。生成した文字列がgenerate_csvクラスメソッドの戻り値となる
+      csv << csv_attributes # CSVの1行目としてヘッダを出力します。
+      all.each do |task|
+        csv << csv_attributes.map{|attr| task.send(attr) }
+      end
+    end
+  end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      task = new
+      task.attributes = row.to_hash.slice(*csv_attributes)
+      task.save!
+    end
+  end
+
+
   # レコードとファイルの間に 1対1のマッピングを設定します。各レコードには1つのファイルを添付します。 
   has_one_attached :image
 
@@ -19,21 +44,24 @@ class Task < ApplicationRecord
 
 
 
-    # 検証前の正規化
-    before_validation :set_nameless_name
-    validates :name, presence: true, length: { maximum: 30 }
 
-    # オリジナルな検証コードをかく
-    validate :validate_name_not_including_comma
 
-    # そのクラス(ここではTask)がある別のクラス(ここではUser)に従属しており、従属先のクラスのidを外部キーとして抱えていることを表しています。
-    # いわば親分を指定するようなイメージ
-    # このような定義をすることでUserクラスのインスタンスに対して、user.tasksといったメソッドで紐づいたTaskオブジェクトの一覧を得られるようになります
-    # またTaskクラスのインスタンスに対しては、task.userで紐づいたUserオブジェクトを得られるようになります
-    belongs_to :user
+  # 検証前の正規化
+  before_validation :set_nameless_name
+  validates :name, presence: true, length: { maximum: 30 }
 
-    scope :recent, -> { order(created_at: :desc )}
 
+  # オリジナルな検証コードをかく
+  validate :validate_name_not_including_comma
+
+
+  # そのクラス(ここではTask)がある別のクラス(ここではUser)に従属しており、従属先のクラスのidを外部キーとして抱えていることを表しています。
+  # いわば親分を指定するようなイメージ
+  # このような定義をすることでUserクラスのインスタンスに対して、user.tasksといったメソッドで紐づいたTaskオブジェクトの一覧を得られるようになります
+  # またTaskクラスのインスタンスに対しては、task.userで紐づいたUserオブジェクトを得られるようになります
+  belongs_to :user
+
+  scope :recent, -> { order(created_at: :desc )}
 
 
     private 

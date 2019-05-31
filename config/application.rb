@@ -1,5 +1,7 @@
+# require_ralativeは、実行したファイルからの相対パスで該当のファイルを探しに行く
 require_relative 'boot'
-
+# rubyのcsvライブラリを利用する。csvは標準ライブラリ
+require 'csv'
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
