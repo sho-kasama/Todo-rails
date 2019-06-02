@@ -6,6 +6,16 @@ document.querySelectirAll('.delete')は削除リンクの要素群を返しま�
 各要素についてaddEventListener()を使って,ajax:successイベントに対応する処理を定義する
 */
 
+/*
+コメントアウトをしたのはなぜか？
+今回はイベントハンドラの処理を走らせる必要がないため、コメントアウトをした
+
+
+
+*/
+
+
+/*
 document.addEventListener('turbolinks:load', fucntion() {
     document.querySelectorAll('.delete').forEach(function (a)) {
         a.addEventListener('ajax:success', function () {
@@ -15,4 +25,4 @@ document.addEventListener('turbolinks:load', fucntion() {
         });
     };
 });
-
+*/
