@@ -42,7 +42,8 @@ table.table.table-hover
       th
     tbody 
       - @tasks.each do |task|
-        tr
+        // サーバー側に削除されたタスクに対応するDOM要素を指定することが可能になりました
+        tr id="task-#{task.id}"
           // クリックすると "tasks/[タスクID]"という詳細表示のURLに還移するようになる
           td = link_to task.name, task
           td = task.created_at

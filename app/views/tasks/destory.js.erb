@@ -1,0 +1,8 @@
+// このJavaScriptビューとして出力されるように、先ほどTasksController#destoryに加えた head :no_contentを削除する
+
+
+document.querySelector("#task-<%= @task.id %>").style.display = 'none';
+
+var message = document.createElement('p');
+message.innerText = 'タスク「<%= @task.name %>」を削除しました。残りのタスクは<%= Task.name %>件です。 ';
+document.querySelector('table')insertAdjacentElement('beforebegin', message);
