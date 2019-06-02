@@ -56,7 +56,10 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_url,notice: "タスク「#{@task.name}」を削除しました。"
+    # 今回はサーバーサイドでタスクを削除すればいい。
+    # HTTPメソッドだとDELETEなので、リクエストは200か204を返す必要がある
+    # またDLETEの場合は、処理だけ受け付けて実際の消去をしない場合は202を返すみたいに
+    head :no_content
   end
 
   # 確認画面を表示するアクションを追加する
