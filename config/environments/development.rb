@@ -12,7 +12,7 @@ Rails.application.configure do
   # 例外が発生し、アプリケーション固有のエラー処理に引っかからない時は
   # 環境ごとの設定ファイル内のtrueとfalseをせってうする
   # よくあるニーズとして開発環境で本番用のエラー画面を出して動作確認したい場合は
-  #config.consider_all_requests_local = true
+  config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -66,5 +66,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
 
-  config.active_job.quene_adapter = :sidekiq
+  config.active_job.queue_adapter = :sidekiq
 end
