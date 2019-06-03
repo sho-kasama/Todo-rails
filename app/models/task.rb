@@ -1,5 +1,9 @@
 class Task < ApplicationRecord
 
+  # acts_as_taggable_on :tags と同じ意味のエイリアス
+  # tags の中にIDやら名前などが入る,イメージ的には親情報
+  acts_as_taggable
+
 
   # メソッド名の前にselfをつけることでクラスメソッドを定義することができる
   # CSVデータにどの属性をどの順番で出力するかをcsv_attributesと言うクラスメソッドから得られるように定義している

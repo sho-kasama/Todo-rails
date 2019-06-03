@@ -10,6 +10,10 @@ class TasksController < ApplicationController
     # 重複を排除
     @tasks = @q.result(distinct: true).page(params[:page])
 
+    if params[:tag_name]
+      @tasks = @tasks.tagged_with("#{params[:tag_name]}") # tagged_with("タグ名")で絞り込む
+    end
+
 
     # 先ほどselfメソッドで定義したクラスメソッドを呼び出すコントローラーを実装する
     # 新しいアクションを作るのではなく「一覧表示のindexアクションに異なるフォーマットでの出力機能を用紙する」と捉える
@@ -80,7 +84,7 @@ class TasksController < ApplicationController
     # フォームからリクエストパラメーターとして送られてきた情報が想定どおりであることをチェックし
     # 受け付ける想定であるname(名称)とdescription(詳しい説明)の情報だけを抜き取る役割をしてる
     def task_params 
-      params.require(:task).permit(:name, :description, :image)
+      params.require(:task).permit(:name, :description, :image, :tag_list)
     end
 
     def set_task
