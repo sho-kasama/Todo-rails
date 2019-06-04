@@ -1,8 +1,19 @@
 @import "bootstrap";
 
+
+// foundation
 @import 'foundation/reset';
 @import 'foundation/mixin';
 @import 'foundation/base';
 @import 'foundation/variable';
 
-@import "layouts/navbar";
+
+// object/component/common
+@import 'object/component/common';
+
+// object/project/root
+@import 'object/project/root';
+
+// layouts/navbar
+@import 'layout/navbar';
+@import 'layout/footer';

@@ -1,0 +1,148 @@
+.top {
+    @include flex-around;
+
+    width: 100%;
+    height: 450px;
+    margin-top: 85px;
+    color: $black;
+    text-align: center;
+    background-image: url('/images/top.png');
+    background-position: center center;
+    background-size: center;
+
+    @include medium {
+        height: 360px;
+    }
+
+    @include small {
+        height: 180px;
+        margin-top: 0;
+    }
+
+  &__margin {
+      margin-top: 80px;
+  }
+
+
+  &__ttl {
+    margin-bottom: 32px;
+    font-size: 78px;
+    text-shadow: 0 0 40px $white;
+
+    @include medium {
+      font-size: 64px;
+    }
+
+    @include small {
+      margin-bottom: 16px;
+      font-size: 32px;
+      text-shadow: 0 0 10px $white;
+    }
+  }
+
+
+  &__subttl {
+    font-size: 28px;
+    font-weight: bold;
+
+    @include medium {
+      font-size: 24px;
+    }
+
+    @include small {
+      font-size: 16px;
+      text-shadow: 0 0 2px $white;
+    }
+  }
+
+
+
+}
+
+
+.root {
+    &__ttl {
+      margin-bottom: 16px;
+      font-size: 22px;
+      font-weight: bold;
+  
+      @include small {
+        display: none;
+      }
+    }
+  
+    &__sub-ttl {
+      margin-bottom: 4px;
+      font-size: 18px;
+    }
+  
+    &__item {
+      margin-bottom: 24px;
+    }
+
+  
+  .about {
+    font-size: 20px;
+    font-weight: bold;
+  
+    @include small {
+      font-size: 16px;
+      font-weight: normal;
+    }
+  
+    &__contents {
+      padding: 60px 0;
+  
+      @include small {
+        padding: 24px 0;
+      }
+  
+      &:first-child {
+        @include small {
+          padding: 0 0 24px;
+        }
+      }
+  
+      p {
+        line-height: 2.4;
+  
+        @include small {
+          line-height: 1.5;
+        }
+      }
+  
+      img {
+        @include circle(56px);
+  
+        margin-right: 16px;
+  
+        @include small {
+          @include circle(48px);
+  
+          margin-right: 8px;
+        }
+      }
+    }
+  
+    &__ttl {
+      margin-bottom: 40px;
+      font-size: 28px;
+  
+      @include small {
+        margin-bottom: 16px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+  
+    &__link {
+      margin-left: 4px;
+      text-decoration: underline;
+    }
+  
+    &__developer {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
