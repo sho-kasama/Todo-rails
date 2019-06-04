@@ -1,10 +1,13 @@
-h1 タスク一覧
+.top
+  .top.margin
 
-// link_to '新規作成' の間に,ransackの提供するヘルパー search_form_forを使って検索用のフォームを追加する
+
+
+
+
+
 = search_form_for @q, class: 'mb-5' do |f|
 
-  // _contはransackが用意している検索マッチャーです
-  // _contをつけると、検索文字列を含むものを検索します。contはcontainsの略です。name_contと指定することでnameに検索文字列を含むものを検索します
 
   .form-group.row
     = f.label :name_cont, '名称', class: 'col-sm2 col-form-label'
