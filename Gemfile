@@ -89,3 +89,9 @@ gem 'i18n_generators'
 
 # Sidekiq
 gem 'sidekiq'
+
+# タグ機能
+gem 'acts-as-taggable-on', '~> 6.0'
+
+# Font Awesome導入
+gem 'font-awesome-rails'

@@ -1,1 +1,8 @@
 @import "bootstrap";
+
+@import 'foundation/reset';
+@import 'foundation/mixin';
+@import 'foundation/base';
+@import 'foundation/variable';
+
+@import "layouts/navbar";

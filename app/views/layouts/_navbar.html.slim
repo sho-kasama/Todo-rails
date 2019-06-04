@@ -1,0 +1,38 @@
+navbar.navbar.navbar--pc
+  .navbar__heading
+    .navbar__heading__contents todoリスト
+  .navbar__contens
+    = link_to 'Todorails', root_path, class: 'navbar__logo'
+    .navbar__nav
+      = link_to root_path, class: 'navbar__nav__item' do
+        i.fa.fa-serach
+    - if current_user
+      = link_to 'タスク一覧', tasks_path, class: 'navbar__nav__item btn--header'
+    - else
+      = link_to 'はじめる', login_path,class: 'header__nav__item btn--header'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//navbar.navbar
+    ul.nav.justify-content-end
+      - if current_user
+        li.nav-item= link_to 'タスク一覧', tasks_path, class: 'btn btn-primary'
+        li.nav-item= link_to '' , '#' , class: 'nav-link.commonNavIcon.profile-icon'
+        // ログインしているユーザーがk管理権限を持っている場合のみ、ナビゲーションにユーザー一覧画面へのリンクが表示されるようになった
+        - if current_user.admin?
+          li.nav-item= link_to 'ユーザー一覧', admin_user_path, class: 'nav-link'
+          li.nav-item= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
+          li.nav-item= link_to 'サインアップ'
+        - else
+          li.nav-link= link_to 'ログイン', login_path, class: 'nav-link'

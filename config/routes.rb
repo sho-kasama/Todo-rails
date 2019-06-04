@@ -12,14 +12,11 @@ Rails.application.routes.draw do
   # HTTPメソッド DELETEでログアウトを行う
   delete '/logout', to: 'sessions#destroy'
 
-
-
   # route.rb でnamespace :adminのなかに定義を記述しているため
   # URLに /admin, ヘルパーメソッド名にadmin_ がつくようになっている。
   namespace :admin do
     resources :users
   end
-
 
   # タスクの一覧(index)が表示されるようにする
   root to: 'tasks#index'
